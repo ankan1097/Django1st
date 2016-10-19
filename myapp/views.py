@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from myapp.models import myclass
+from myapp.models import *
 from datetime import datetime
-from myapp.forms import LoginForm
-
+from myapp.forms import *
 
 def hello(request):
 	today = datetime.now().date()
@@ -42,14 +41,24 @@ class StaticView(TemplateView):
 
 def login(request):
 	username = "none"
-
 	if request.method == "POST":
 		MyLoginForm = LoginForm(data = request.POST)
-
 		if MyLoginForm.is_valid():
-			username = "aa"
 			username = MyLoginForm.cleaned_data['username']
 	else:
 		MyLoginForm = LoginForm()
-
 	return render(request, 'loggedin.html', {"username" : username})
+
+def SaveProfile(request):
+	saved = False
+	if request.method == "POST":
+		MyProfileForm = ProfileForm(request.POST, request.FILES)
+		if MyProfileForm.is_valid():
+			profile = Profile()
+			profile.name = MyProfileForm.cleaned_data("name")
+			profile.picture = MyProfileForm.cleaned_data("picture")
+			profile.save()
+			saved = True
+	else:
+		MyProfileForm = ProfileForm()
+	return render(request, 'saved.html', locals())
