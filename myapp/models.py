@@ -12,8 +12,8 @@ class Meta:
 	db_table = "mytable"
 
 class Profile(models.Model):
-	name = models.CharField(max_length = 50)
-	picture = models.ImageField(upload_to = 'pictures')
+	name = models.CharField(max_length = 100)
+	picture = models.FileField(upload_to = 'Documents/')
 
 	class Meta:
 		db_table = "profile"

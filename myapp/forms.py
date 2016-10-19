@@ -7,5 +7,5 @@ class LoginForm(forms.Form):
 	password = forms.CharField(widget = forms.PasswordInput(), required = False)
 
 class ProfileForm(forms.Form):
-	name = forms.CharField(max_length = 100)
-	pictures = forms.ImageField()
+	name = forms.CharField(max_length = 100,required = False)
+	pictures = forms.FileField()

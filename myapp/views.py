@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from myapp.models import *
 from datetime import datetime
 from myapp.forms import *
+from django.core.files.storage import FileSystemStorage
 
 def hello(request):
 	today = datetime.now().date()
@@ -50,15 +51,15 @@ def login(request):
 	return render(request, 'loggedin.html', {"username" : username})
 
 def SaveProfile(request):
-	saved = False
+	savd = False
 	if request.method == "POST":
 		MyProfileForm = ProfileForm(request.POST, request.FILES)
 		if MyProfileForm.is_valid():
+			savd = True
 			profile = Profile()
-			profile.name = MyProfileForm.cleaned_data("name")
-			profile.picture = MyProfileForm.cleaned_data("picture")
+			profile.name =  MyProfileForm.cleaned_data["name"]
+			profile.picture = MyProfileForm.cleaned_data["picture"]
 			profile.save()
-			saved = True
 	else:
 		MyProfileForm = ProfileForm()
 	return render(request, 'saved.html', {})

@@ -5,10 +5,9 @@
 	<title>Document</title>
 </head>
 <body>
-	{% if saved %}
-		Your profile is saved.
-	{% endif %}
-	{% if not saved %}
+	{% if savd == true %}
+		Your profile is saved. 
+	{% else %}
 		not saved
 	{% endif %}
 </body>
