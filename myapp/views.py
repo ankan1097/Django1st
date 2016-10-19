@@ -61,4 +61,4 @@ def SaveProfile(request):
 			saved = True
 	else:
 		MyProfileForm = ProfileForm()
-	return render(request, 'saved.html', locals())
+	return render(request, 'saved.html', {})
