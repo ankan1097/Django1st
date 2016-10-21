@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from myapp.models import *
+from django.template import RequestContext
 from datetime import datetime
 from myapp.forms import *
 from django.core.files.storage import FileSystemStorage
@@ -48,7 +49,11 @@ def login(request):
 			username = MyLoginForm.cleaned_data['username']
 	else:
 		MyLoginForm = LoginForm()
-	return render(request, 'loggedin.html', {"username" : username})
+	# response = render_to_response(request, 'loggedin.html', {"username" : username}, RequestContext(request))
+	response = HttpResponse("helllo")
+	response.set_cookie('last_connection', datetime.now())
+	response.set_cookie('username', datetime.now())
+	return response
 
 def SaveProfile(request):
 	savd = False

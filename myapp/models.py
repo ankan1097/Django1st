@@ -13,7 +13,7 @@ class Meta:
 
 class Profile(models.Model):
 	name = models.CharField(max_length = 100)
-	picture = models.FileField(upload_to = 'Documents/')
+	picture = models.FileField(upload_to = '')
 
 	class Meta:
 		db_table = "profile"
