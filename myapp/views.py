@@ -47,13 +47,17 @@ def login(request):
 		MyLoginForm = LoginForm(data = request.POST)
 		if MyLoginForm.is_valid():
 			username = MyLoginForm.cleaned_data['username']
+			request.session['username'] = username
 	else:
 		MyLoginForm = LoginForm()
-	# response = render_to_response(request, 'loggedin.html', {"username" : username}, RequestContext(request))
-	response = HttpResponse("helllo")
-	response.set_cookie('last_connection', datetime.now())
-	response.set_cookie('username', datetime.now())
-	return response
+	return render(request, 'loggedin.html', {"username" : username})
+
+def logout(request):
+	try:
+		del request.session['username']
+	except:
+		pass
+	return HttpResponse("loggedout")
 
 def SaveProfile(request):
 	savd = False

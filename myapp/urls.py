@@ -11,5 +11,6 @@ urlpatterns = [
 		url(r'^loogin/', TemplateView.as_view(template_name = 'login.html')),
 		url(r'^connect/', formView, name = 'form'),
 		url(r'^login/', login, name = 'login'),
+		url(r'^logout/', logout, name = 'Logout'),
 		url(r'^upload/', TemplateView.as_view(template_name = 'profile.html')),
 		url(r'^saved/', SaveProfile, name = 'saved')]
